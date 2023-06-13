@@ -1,0 +1,8 @@
+{{ with pkiCert "vault_int/issue/max-leaf" "common_name=test.max.com" }}
+{{ .Data.Cert }}
+{{- end -}}
+{{- with secret "vault_int/cert/ca_chain" -}}
+{{ .Data.certificate }}
+{{- end -}}
+
+

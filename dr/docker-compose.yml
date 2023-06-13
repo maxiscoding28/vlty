@@ -1,0 +1,59 @@
+services:
+  dr0:
+    container_name: dr0
+    image: hashicorp/${OSS:-vault-enterprise}:${VERSION:-latest}
+    volumes:
+      - ./configs/config0.hcl:/vault/config/config.hcl
+      - ./data/data0:/opt/vault/data
+      - ./logs/vault0.log:/vault/logs/vault0.log
+    networks:
+      - vaulty-net
+    ports:
+      - "8206:8206"
+    cap_add:
+      - "IPC_LOCK"
+    env_file:
+      - ../license.env
+    environment:
+      - VAULT_ADDR=http://127.0.0.1:8206
+    command: server
+  dr1:
+    container_name: dr1
+    image: hashicorp/${OSS:-vault-enterprise}:${VERSION:-latest}
+    volumes:
+      - ./configs/config1.hcl:/vault/config/config.hcl
+      - ./data/data1:/opt/vault/data
+      - ./logs/vault1.log:/vault/logs/vault1.log
+    networks:
+      - vaulty-net
+    ports:
+      - "8208:8208"
+    cap_add:
+      - "IPC_LOCK"
+    env_file:
+      - ../license.env
+    environment:
+      - VAULT_ADDR=http://127.0.0.1:8208
+    command: server
+  dr2:
+    container_name: dr2
+    image: hashicorp/${OSS:-vault-enterprise}:${VERSION:-latest}
+    volumes:
+      - ./configs/config2.hcl:/vault/config/config.hcl
+      - ./data/data2:/opt/vault/data
+      - ./logs/vault2.log:/vault/logs/vault2.log
+    networks:
+      - vaulty-net
+    ports:
+      - "8210:8210"
+    cap_add:
+      - "IPC_LOCK"
+    env_file:
+      - ../license.env
+    environment:
+      - VAULT_ADDR=http://127.0.0.1:8210
+    command: server
+networks:
+  vaulty-net:
+    name: vaulty-net
+    external: true
