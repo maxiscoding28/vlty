@@ -1,0 +1,24 @@
+services:
+  vault-agent:
+    container_name: agent
+    image: hashicorp/vault-enterprise:1.12.1-ent
+    volumes:
+      - ./agent.hcl:/vault/config/agent.hcl
+      - ./role-id:/vault/agent/role-id
+      - ./secret-id:/vault/agent/secret-id
+      - ./template.ctmpl:/vault/agent/template.ctmpl
+    networks:
+      - vaulty-net
+    ports:
+      - "8210:8210"
+    cap_add:
+      - "IPC_LOCK"
+    env_file:
+      - ../license.env
+    environment:
+      - VAULT_ADDR=http://v0:8200
+    command: vault agent -config=/vault/config/agent.hcl
+networks:
+  vaulty-net:
+    name: vaulty-net
+    external: true

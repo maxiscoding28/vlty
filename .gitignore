@@ -1,0 +1,9 @@
+license.env
+*.json
+*.nogit
+*.txt
+.DS_Store
+vault-prometheus-token
+role-id
+secret-id
+recipes

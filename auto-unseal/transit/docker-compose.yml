@@ -1,0 +1,23 @@
+services:
+  transit:
+    container_name: transit
+    image: hashicorp/${OSS:-vault-enterprise}:${VERSION:-latest}
+    volumes:
+      - ./config.hcl:/vault/config/config.hcl
+      - ./data:/opt/vault/data
+    networks:
+      - vaulty-net
+    ports:
+      - "8220:8220"
+    cap_add:
+      - "IPC_LOCK"
+    env_file:
+      - ../../license.env
+    environment:
+      - VAULT_ADDR=http://127.0.0.1:8220
+      - VAULT_TOKEN=$VAULT_TOKEN
+    command: server
+networks:
+  vaulty-net:
+    name: vaulty-net
+    external: true

@@ -1,0 +1,3 @@
+{{ with secret "kv/data/pass" }}
+{{ .Data.data.max }}
+{{ end }}

@@ -1,0 +1,24 @@
+services:
+  gcp0:
+    container_name: azure0
+    image: hashicorp/${OSS:-vault-enterprise}:${VERSION:-latest}
+    volumes:
+      - ./config.hcl:/vault/config/config.hcl
+      - ./data:/opt/vault/data
+      - ./logs/vault.log:/vault/logs/vault.log
+    networks:
+      - vaulty-net
+    ports:
+      - "8224:8224"
+    cap_add:
+      - "IPC_LOCK"
+    env_file:
+      - ../../license.env
+    environment:
+      - VAULT_ADDR=http://127.0.0.1:8224
+
+    command: server
+networks:
+  vaulty-net:
+    name: vaulty-net
+    external: true

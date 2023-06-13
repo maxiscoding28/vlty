@@ -1,0 +1,27 @@
+services:
+  aws0:
+    container_name: aws0
+    image: hashicorp/${OSS:-vault-enterprise}:${VERSION:-latest}
+    volumes:
+      - ./config.hcl:/vault/config/config.hcl
+      - ./data:/opt/vault/data
+      - ./logs/vault.log:/vault/logs/vault.log
+    networks:
+      - vaulty-net
+    ports:
+      - "8218:8218"
+    cap_add:
+      - "IPC_LOCK"
+    env_file:
+      - ../../license.env
+    environment:
+      - VAULT_ADDR=http://127.0.0.1:8218
+      - AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+      - AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN
+      - VAULT_AWSKMS_SEAL_KEY_ID=$VAULT_AWSKMS_SEAL_KEY_ID
+    command: server
+networks:
+  vaulty-net:
+    name: vaulty-net
+    external: true

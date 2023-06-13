@@ -1,0 +1,27 @@
+services:
+  gcp0:
+    container_name: gcp0
+    image: hashicorp/${OSS:-vault-enterprise}:${VERSION:-latest}
+    volumes:
+      - ./config.hcl:/vault/config/config.hcl
+      - $GCP_CREDS_FILE:/vault/config/gcp-sa-creds.json
+      - ./data:/opt/vault/data
+      - ./logs/vault.log:/vault/logs/vault.log
+    networks:
+      - vaulty-net
+    ports:
+      - "8222:8222"
+    cap_add:
+      - "IPC_LOCK"
+    env_file:
+      - ../../license.env
+    environment:
+      - VAULT_ADDR=http://127.0.0.1:8222
+      - GOOGLE_PROJECT=$GOOGLE_PROJECT
+      - VAULT_GCPKMS_SEAL_KEY_RING=$VAULT_GCPKMS_SEAL_KEY_RING
+      - VAULT_GCPCKMS_SEAL_CRYPTO_KEY=$VAULT_GCPCKMS_SEAL_CRYPTO_KEY
+    command: server
+networks:
+  vaulty-net:
+    name: vaulty-net
+    external: true
