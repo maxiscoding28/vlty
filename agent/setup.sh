@@ -8,8 +8,8 @@ export SECRET_ID=$(vault write -f -field=secret_id auth/approle/role/agent/secre
 
 vault policy write agent-read - <<EOF
 # Read permission on the k/v secrets
-path "/kv/data/pass" {
-    capabilities = ["read"]
+path "*" {
+    capabilities = ["read", "create", "update"]
 }
 path "auth/token/lookup-self" {
   capabilities = ["read"]

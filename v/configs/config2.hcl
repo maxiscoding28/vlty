@@ -23,7 +23,7 @@ telemetry {
 api_addr = "http://v2:8204"
 cluster_addr = "http://v2:8205"
 cluster_name = "v"
-// ui = true
+ui = true
 log_level = "info"
 raw_storage_endpoint = true
 disable_performance_standby = false

@@ -1,0 +1,63 @@
+dn: ou=groups,dc=example,dc=org
+changetype: add
+objectClass: organizationalunit
+objectClass: top
+ou: groups
+description: groups of users
+
+dn: ou=users,dc=example,dc=org
+changetype: add
+objectClass: organizationalunit
+objectClass: top
+ou: users
+description: users
+
+dn: cn=administrators,ou=groups,dc=example,dc=org
+changetype: add
+objectClass: groupofnames
+objectClass: top
+description: testing group for administrators
+cn: administrators
+member: cn=laura,ou=users,dc=example,dc=org
+member: cn=steven,ou=users,dc=example,dc=org
+
+dn: cn=laura,ou=users,dc=example,dc=org
+changetype: add
+objectClass: person
+objectClass: top
+cn: laura
+sn: laura
+memberOf: cn=administrators,ou=groups,dc=example,dc=org
+userPassword: laura
+
+dn: cn=steven,ou=users,dc=example,dc=org
+changetype: add
+objectClass: person
+objectClass: top
+cn: steven
+sn: steven
+memberOf: cn=administrators,ou=groups,dc=example,dc=org
+userPassword: steven
+
+dn: ou=users2,ou=users,dc=example,dc=org
+changetype: add
+objectClass: organizationalunit
+objectClass: top
+ou: users2
+description: users2
+
+dn:cn=laura2,ou=users2,ou=users,dc=example,dc=org
+changetype: add
+objectClass: person
+objectClass: top
+cn: laura2
+sn: laura2
+userPassword: laura2
+
+dn: cn=steven2,ou=users2,ou=users,dc=example,dc=org
+changetype: add
+objectClass: person
+objectClass: top
+cn: steven2
+sn: steven2
+userPassword: steven2
