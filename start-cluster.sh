@@ -27,9 +27,6 @@ elif [[ $# -eq 2 && $Dont_Init_Flag!=ni ]]; then
     echo -e ${Yellow}Please try again.${Color_Off}
     exit 1
 else
-    echo -e ${Yellow}Initializing $Cluster cluster${Color_Off}
-    sleep 2
-
     if [ "$Cluster" = "v" ]; then
         nodeport1=8200
         nodeport2=8202
@@ -46,6 +43,8 @@ else
         echo "Unknown cluster: $Cluster"
         exit 1
     fi
+    sleep 5
+    echo -e ${Yellow}Initializing $Cluster cluster${Color_Off}
     VAULT_ADDR=http://127.0.0.1:$nodeport1 vault operator init -format=json -key-shares=1 -key-threshold=1 | jq -r > $Cluster/init.json
     echo -e ${Green}Cluster initialized. Init output saved to $Cluster/init.json${Color_Off}
     echo -e ${Yellow}Unsealing vault.${Color_Off}

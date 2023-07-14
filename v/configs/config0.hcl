@@ -29,5 +29,5 @@ cluster_name = "v-cluster"
 ui = true
 log_level = "info"
 raw_storage_endpoint = true
-disable_performance_standby = true
+disable_performance_standby = false
 
