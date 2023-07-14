@@ -28,3 +28,5 @@ vault write database/roles/my-role \
     revocation_statements='{ "db": "vault-db", "roles": [{ "role": "userAdmin" }] }' \
     default_ttl="5m" \
     max_ttl="5m"
+
+ vault read database/creds/my-role

@@ -23,7 +23,7 @@ PR_SECONDARY_TOKEN=$(v0 write sys/replication/performance/primary/secondary-toke
 # - Sign in to pr
 ####################
 
-pr0 write sys/replication/performance/secondary/enable token=$PR_SECONDARY_TOKEN
+pr0 write sys/replication/performance/secondary/enable token=$PR_SECONDARY_TOKEN 
 
 # Test auth method works on PR
 pr0 login -method=userpass username=pr-admin password=1234
