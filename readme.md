@@ -36,8 +36,4 @@ You can pass a specfic version of vault using the variable `VERSION`: `VERSION=1
 
 You can use the OSS version of Vault byt passing the variable `OSS=vault`: `OSS=vault ./start-cluster.sh`
 
-You can prevent the scrip from initializing Vault by passing a second argument of `ni`: `./start-cluster.sh v ni`
-
-
-
-## Working with [v/](./v), [dr/](./dr), and [pr/](./pr)
+You can prevent the script from initializing Vault by passing a second argument of `ni`: `./start-cluster.sh v ni`
