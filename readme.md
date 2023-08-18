@@ -1,6 +1,6 @@
-# 🤖 Vlty 🤖
+# 👨‍🍳 Vlty (Cookbook Branch) 👨‍🍳
 
-**NOTE**: This branch of Vlty includes a directory called `recipes/` which includes some useful commands for enabling various components of Vault. 👨‍🍳
+**NOTE**: This branch of Vlty includes a directory called `recipes/` which includes some useful commands for enabling various components of Vault. 
 
 ## What Is This?
 Vlty (pronounced vaulty) is a tool I made for quickly reproducing issues related to Hashicorp Vault on my local machine.
