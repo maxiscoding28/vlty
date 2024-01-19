@@ -1,0 +1,18 @@
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+distinguished_name = dn
+req_extensions = req_ext
+
+[dn]
+C = US
+ST = Colorado
+L = Denver
+O = Client
+OU = HelpDesk
+CN = denver.example.com
+
+[req_ext]
+keyUsage = digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth, clientAuth

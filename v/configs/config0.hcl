@@ -27,7 +27,7 @@ api_addr = "http://v0:8200"
 cluster_addr = "http://v0:8201"
 cluster_name = "v-cluster"
 ui = true
-log_level = "info"
+log_level = "debug"
 raw_storage_endpoint = true
 disable_performance_standby = false
 
