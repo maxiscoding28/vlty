@@ -15,10 +15,10 @@ docker-compose -p $Cluster down -v
 if [[ "$Retain_Data_Flag" = "keep" ]]; then
     echo -e ${Yellow}'"keep" flag was passed. Retaining cluster data'
 else
-    rm -rf $Cluster/data/data0/* $Cluster/data/data1/* $Cluster/data/data2/*
-    rm -rf $Cluster/logs/vault*
-    rm -f $Cluster/init.json
-    touch $Cluster/logs/vault0.log $Cluster/logs/vault1.log $Cluster/logs/vault2.log
+    rm -rf /Users/maxwinslow/dev/vlty/$Cluster/data/data0/* /Users/maxwinslow/dev/vlty/$Cluster/data/data1/* /Users/maxwinslow/dev/vlty/$Cluster/data/data2/*
+    rm -rf /Users/maxwinslow/dev/vlty/$Cluster/logs/vault*
+    rm -f /Users/maxwinslow/dev/vlty/$Cluster/init.json
+    touch /Users/maxwinslow/dev/vlty/$Cluster/logs/vault0.log /Users/maxwinslow/dev/vlty/$Cluster/logs/vault1.log /Users/maxwinslow/dev/vlty/$Cluster/logs/vault2.log
 fi
 echo -e ${Yellow}Removing files${Color_Off}
 echo -e ${Red}Stopped v cluster${Color_Off}

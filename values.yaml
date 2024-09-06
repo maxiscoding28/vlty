@@ -1,0 +1,36 @@
+injector:
+   enabled: false
+server:
+   enterpriseLicense:
+     secretName: vault-ent-license
+   image:
+     repository: hashicorp/vault-enterprise
+     tag: 1.17.3-ent
+   affinity: ""
+   serviceAccount:
+      create: false
+      name: vault-auth-k8s-sa
+   ha:
+      enabled: true
+      raft: 
+        enabled: true
+        setNodeId: true
+        config: |
+          storage "raft" {
+              path    = "/vault/data/"
+              retry_join {
+                leader_api_addr = "http://vault-0.vault-internal.default.svc.cluster.local:8200"
+              }
+              retry_join {
+                leader_api_addr = "http://vault-1.vault-internal.default.svc.cluster.local:8200"
+              }
+              retry_join {
+                leader_api_addr = "http://vault-2.vault-internal.default.svc.cluster.local:8200"
+              }
+            }
+          listener "tcp" {
+              address = "[::]:8200"
+              cluster_address = "[::]:8201"
+              tls_disable = "true"
+          }
+          service_registration "kubernetes" {}
