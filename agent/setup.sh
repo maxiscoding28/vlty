@@ -6,7 +6,7 @@ vault write -f auth/approle/role/agent
 export ROLE_ID=$(vault read -field=role_id auth/approle/role/agent/role-id)
 export SECRET_ID=$(vault write -f -field=secret_id auth/approle/role/agent/secret-id)
 
-vault policy write agent-read - <<EOF
+vault policy write agent - <<EOF
 # Read permission on the k/v secrets
 path "*" {
     capabilities = ["read", "create", "update"]
@@ -16,11 +16,13 @@ path "auth/token/lookup-self" {
 }
 EOF
 
-vault write auth/approle/role/agent token_policies=agent-read
+vault write auth/approle/role/agent token_policies=agent 
+
+vault write auth/approle/role/agent token_ttl=5s token_max_ttl=30m
 
 vault secrets enable -version=2 kv
 
 vault kv put kv/pass max=1234
 
-echo $ROLE_ID > /Users/maxwinslow/sandbox-vault/vlty/agent/role-id
-echo $SECRET_ID > /Users/maxwinslow/sandbox-vault/vlty/agent/secret-id
+echo $ROLE_ID > /Users/maxwinslow/dev/vlty/agent/role-id
+echo $SECRET_ID > /Users/maxwinslow/dev/vlty/agent/secret-id

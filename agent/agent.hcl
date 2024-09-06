@@ -1,16 +1,3 @@
-listener "tcp" {
-  address = "0.0.0.0:8210"
-  tls_disable = true
-}
-
-api_proxy {
-  // use_auto_auth_token = "true"
-}
-
-cache {
-  use_auto_auth_token = "true"
-}
-
 auto_auth {
   method "approle" {
     config = {
@@ -19,20 +6,18 @@ auto_auth {
       remove_secret_id_file_after_reading = false
     }
   }
-
-  sink "file" {
-    config = {
-      path = "/vault/token"
-    }
-  }
 }
 
-template_config {
-  static_secret_render_interval = "5m"
-}
+// template {
+//   source      = "/vault/agent/template.ctmpl"
+//   destination = "/vault/render.pem"
+// }
 
 template {
-  source      = "/vault/agent/template.ctmpl"
-  destination = "/vault/render.txt"
-  error_on_missing_key = true
+  source      = "/vault/agent/cert.ctmpl"
+  destination = "/vault/cert.pem"
+}
+template {
+  source      = "/vault/agent/key.ctmpl"
+  destination = "/vault/key.pem"
 }

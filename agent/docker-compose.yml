@@ -1,12 +1,13 @@
 services:
   vault-agent:
     container_name: agent
-    image: hashicorp/vault-enterprise:1.12.1-ent
+    image: hashicorp/vault-enterprise:1.16.3-ent
     volumes:
       - ./agent.hcl:/vault/config/agent.hcl
       - ./role-id:/vault/agent/role-id
       - ./secret-id:/vault/agent/secret-id
-      - ./template.ctmpl:/vault/agent/template.ctmpl
+      - ./cert.ctmpl:/vault/agent/cert.ctmpl
+      - ./key.ctmpl:/vault/agent/key.ctmpl
     networks:
       - vaulty-net
     ports:
