@@ -13,6 +13,7 @@ storage "raft" {
     retry_join = {
         leader_api_addr = "http://v1:8202"
     }
+    // apply_delay = "3s"
 }
 
 telemetry {
